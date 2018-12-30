@@ -16,13 +16,13 @@ class Solution(object):
         # Divide A into two halves [0...N/2 -1] and [N/2...N-1]
         # Compute sum of each powerset for left half
         left = {A[0]}
-        for i in xrange(1, N/2):
+        for i in range(1, N/2):
         	left = left | {A[i]} | {x + A[i] for x in left}
         # If there is subset sum to 0 in left, return True
         if 0 in left: return True
         # Compute sum of each powerset for right half
         right = {A[-1]}
-        for i in xrange(N/2, N-1):
+        for i in range(N/2, N-1):
         	right = right | {A[i]} | {x + A[i] for x in right}
         # If there is subset sum to 0 in right, return True
         if 0 in right: return True
@@ -32,9 +32,6 @@ class Solution(object):
         sleft = sum(A[:N/2])
         sright = sum(A[N/2:])
         return any(-l in right and (l, -l) != (sleft, sright) for l in left)
-
-    def hasSubsetSum(self, A, S):
-        return self.hasSubsetSumDP(A, S)
 
     def hasSubsetSumRecursive(self, A, S):
         if S == 0:
